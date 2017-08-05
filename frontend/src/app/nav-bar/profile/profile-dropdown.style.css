@@ -1,0 +1,59 @@
+:host {
+    display: flex;
+    flex: 0 0 auto; 
+    align-items: stretch;
+    justify-content: center;
+}
+
+.dropdown {
+    display: flex;
+}
+
+.dropdown:hover {
+    background-color: #CCC;
+}
+
+.dropdown.show {
+    background-color: #FFF;
+    box-shadow: 0 0 5px #BBB;
+}
+
+.dropdown.show::after {
+    background-color: #FFF;
+    content: "";
+    height: 5px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 1000;
+}
+
+.profile-dropdown-icon {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0rem 2rem;
+    cursor: pointer;
+}
+
+.profile-dropdown-icon::after {
+    display: none;
+}
+
+.profile-dropdown-icon:focus {
+    outline: 0;
+    box-shadow: inherit;
+}
+
+.profile-management-panel {
+    left: inherit;
+    background-color: #FFF;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    width: 25rem;
+    padding: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 0 5px #BBB;
+}

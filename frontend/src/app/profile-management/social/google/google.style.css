@@ -1,0 +1,8 @@
+#my-signin2 {
+    display: flex;
+}
+
+#my-signin2 > div {
+    display: flex;
+    flex: 1;
+}

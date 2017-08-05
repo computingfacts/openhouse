@@ -1,0 +1,20 @@
+<form class="login-form" [formGroup]="loginFormGroup" novalidate>
+
+    <!-- Username -->
+    <div class="form-group">
+        <input class="form-control" formControlName="username" placeholder="Username or email address">
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+        <input class="form-control" type="password" formControlName="password" placeholder="Password">
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" (click)="login()">Login</button>
+    </div>
+
+    <cf-or-break></cf-or-break>
+    
+    <cf-social-auth></cf-social-auth>
+</form>

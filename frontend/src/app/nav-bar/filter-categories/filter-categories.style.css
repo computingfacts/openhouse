@@ -1,0 +1,29 @@
+:host {
+    display: flex;
+    flex: 1 1 100%;
+    align-items: stretch;
+
+    /* No selection for text */
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
+}
+
+.nav-item {
+    width: 7rem;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 0.6rem;
+}
+
+.nav-item:hover {
+    background-color: rgba(200, 200, 200, 0.2);
+}
+
+.nav-item.active {
+    border-bottom: solid thin #CCC;
+}

@@ -1,0 +1,17 @@
+cf-nav-bar {
+    /* No selection for text */
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
+}
+
+cf-logo {
+    margin-left: 5rem;
+    margin-right: 3rem;
+}
+
+.navbar {
+    align-items: stretch;
+    padding: 0;
+}
