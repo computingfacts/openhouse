@@ -14,8 +14,8 @@ declare const gapi: IGoogleApi;
 export class GoogleAuthComponent extends ABaseSocialComponentController {
 
     private static hasInit = false;
-    private static readonly client = "google";
-    private static readonly buttonColour = "#ffffff";
+    public static readonly client = "google";
+    public static readonly buttonColour = "#ffffff";
     private static readonly clientId = "920128576940-ht075v8i4d2udrkpiegm1m5rjqqaq105.apps.googleusercontent.com";
     private static readonly cookiePolicy = "single_host_origin";
     private static readonly scope = "profile email";
@@ -28,7 +28,7 @@ export class GoogleAuthComponent extends ABaseSocialComponentController {
         private readonly socialUserStore: SocialUserStoreService,
     ) { super(); }
 
-    private static initGoogleAuth(): void {
+    public static initGoogleAuth(): void {
         if (GoogleAuthComponent.hasInit) {
             return;
         }

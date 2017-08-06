@@ -12,8 +12,8 @@ declare const FB: IFacebookApi;
 export class FacebookAuthComponent extends ABaseSocialComponentController {
 
     private static hasInit = false;
-    private static readonly client = "facebook";
-    private static readonly buttonColour = "#3B5998";
+    public static readonly client = "facebook";
+    public static readonly buttonColour = "#3B5998";
     private static readonly appId = "252336858606968";
     private static readonly version = "v2.8";
     private static readonly scope = "public_profile,email";
