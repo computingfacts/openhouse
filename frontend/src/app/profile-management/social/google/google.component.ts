@@ -1,65 +1,77 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
+import { Component, ViewChild, ElementRef } from "@angular/core";
 import { Observable, Subject } from "rxjs";
+import { SocialUserStoreService } from "../social-user-store/social-user-store.service";
+import { BaseSocialUserComponent, ABaseSocialComponentController } from "../base-social-user-component/base-social-user-component";
+import { IGoogleApi, IGoogleAuth, IGoogleProfile } from "./api";
 
-declare const gapi: any;
+declare const gapi: IGoogleApi;
 
-interface IGoogleAuth {
-    attachClickHandler(
-        element: Element,
-        o: Object,
-        success: (user: IGoogleUser) => void,
-        failure: (reason: string) => void
-    ): void;
-}
+@Component(BaseSocialUserComponent.create(
+    GoogleAuthComponent.client, 
+    GoogleAuthComponent.buttonColour,
+    GoogleAuthComponent.initGoogleAuth
+))
+export class GoogleAuthComponent extends ABaseSocialComponentController {
 
-interface IGoogleUser {
-    getBasicProfile(): IGoogleProfile;
-}
-
-interface IGoogleProfile {
-
-}
-
-/**<button #googleAuth class="btn btn-primary google">
-            <span class="icon fa fa-google"></span>
-            <span class="title">Google</span>
-        </button> */
-
-@Component({
-    selector: "cf-google-auth",
-    template: `
-        <div id="my-signin2"></div>
-    `,
-    styleUrls: ["./google.style.css"]
-})
-export class GoogleAuthComponent implements AfterViewInit {
-
+    private static hasInit = false;
+    private static readonly client = "google";
+    private static readonly buttonColour = "#ffffff";
     private static readonly clientId = "920128576940-ht075v8i4d2udrkpiegm1m5rjqqaq105.apps.googleusercontent.com";
     private static readonly cookiePolicy = "single_host_origin";
     private static readonly scope = "profile email";
 
+    private static auth2: IGoogleAuth;
+
     @ViewChild("googleAuth") private googleAuth: ElementRef;
 
-    public ngAfterViewInit(): void {
-        this.attachButton();
-    }
+    constructor(
+        private readonly socialUserStore: SocialUserStoreService,
+    ) { super(); }
 
-    private attachButton(): void {
-        gapi.signin2.render("my-signin2", {
-            scope: GoogleAuthComponent.scope,
-            longtitle: true,
-            theme: "light",
-            onsuccess: user => this.handleGoogleUser(user.getBasicProfile()),
-            onfailure: reason => this.handleFailure(reason)
+    private static initGoogleAuth(): void {
+        if (GoogleAuthComponent.hasInit) {
+            return;
+        }
+
+        gapi.load("auth2", () => {
+            GoogleAuthComponent.auth2 = gapi.auth2.init({
+                client_id: GoogleAuthComponent.clientId,
+                cookiepolicy: GoogleAuthComponent.cookiePolicy,
+                scope: GoogleAuthComponent.scope
+            });
         });
     }
 
+    public ngAfterViewInit(): void {
+        this.attachButton(GoogleAuthComponent.auth2);
+    }
+
+    private attachButton(auth: IGoogleAuth): void {
+        this.spinning = false;
+        auth.attachClickHandler(
+            this.googleAuth.nativeElement,
+            {},
+            user => this.handleGoogleUser(user.getBasicProfile()),
+            reason => this.handleFailure(reason)
+        );
+    }
+
     private handleGoogleUser(profile: IGoogleProfile): void {
-        debugger;
+        this.socialUserStore.setSocialUser({
+            providerId: GoogleAuthComponent.client,
+            userId: profile.getId(),
+            email: profile.getEmail(),
+            firstName: profile.getGivenName(),
+            lastName: profile.getFamilyName()
+        });
     }
 
     private handleFailure(reason: string): void {
-        debugger;
+        this.socialUserStore.loginFailed(reason, GoogleAuthComponent.client);
+    }
+
+    public onClick(): void {
+        throw new Error("This should have been overridden");
     }
 
 }

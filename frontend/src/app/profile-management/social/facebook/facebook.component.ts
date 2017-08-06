@@ -1,35 +1,70 @@
-import { Component, AfterViewInit } from "@angular/core";
+import { Component } from "@angular/core";
+import { IFacebookResponse, IFacebookUser, IFacebookApi } from "./api";
+import { BaseSocialUserComponent, ABaseSocialComponentController } from "../base-social-user-component/base-social-user-component";
 
-declare const initFB: () => void;
 declare const FB: IFacebookApi;
 
-interface IFacebookApi {
-    login(callback: (response) => void, options: { scope: string });
-    logout(callback: (response) => void);
-    getLoginStatus(callback: (response) => void);
-}
+@Component(BaseSocialUserComponent.create(
+    FacebookAuthComponent.client,
+    FacebookAuthComponent.buttonColour,
+    FacebookAuthComponent.initFacebookService
+))
+export class FacebookAuthComponent extends ABaseSocialComponentController {
 
-interface IFacebookLoginResponse {
-    status: string;
-}
+    private static hasInit = false;
+    private static readonly client = "facebook";
+    private static readonly buttonColour = "#3B5998";
+    private static readonly appId = "252336858606968";
+    private static readonly version = "v2.8";
+    private static readonly scope = "public_profile,email";
 
-@Component({
-    selector: "cf-facebook-auth",
-    template: `
-        <div class="fb-login-button" 
-             data-max-rows="1"
-             data-size="large" 
-             data-button-type="continue_with" 
-             data-show-faces="false" 
-             data-auto-logout-link="false" 
-             data-use-continue-as="false">
-        </div>
-    `,
-    styleUrls: ["./facebook.style.css"]
-})
-export class FacebookAuthComponent implements AfterViewInit {
-    
-      public ngAfterViewInit(): void {
-          initFB();
-      }
+    public static initFacebookService(): void {
+        if (FacebookAuthComponent.hasInit) {
+            return;
+        }
+
+        FB.init({
+            appId: FacebookAuthComponent.appId,
+            cookie: true,
+            xfbml: true,
+            version: FacebookAuthComponent.version
+        });
+
+        FacebookAuthComponent.hasInit = true;
+    }
+
+    public ngAfterViewInit(): void {
+        FB.getLoginStatus(this.handleLoginStatus.bind(this));
+    }
+
+    private handleLoginStatus(response: IFacebookResponse): void {
+        this.spinning = false;
+        switch (response.status) {
+            case "connected":
+                this.handleUser(response.authResponse);
+                break;
+            case "not_authorized":
+                this.handleLoginFail();
+                break;
+            case "unknown":
+                break; // Don't do anything
+            default:
+                throw new Error("FacebookAuthComponent: unexpected response status");
+        }
+    }
+
+    private handleUser(user: IFacebookUser): void {
+        console.log(user);
+    }
+
+    private handleLoginFail(): void {
+        debugger;
+    }
+
+    public onClick(): void {
+        FB.login(
+            this.handleLoginStatus.bind(this),
+            { scope: FacebookAuthComponent.scope }
+        );
+    }
 }

@@ -11,28 +11,22 @@
   <link rel="stylesheet" href="assets/bootstrap.min.css">
   <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 
-  <meta name="google-signin-client_id" content="920128576940-ht075v8i4d2udrkpiegm1m5rjqqaq105.apps.googleusercontent.com">
+  <!-- Google auth -->
+  <script src="https://apis.google.com/js/api:client.js"></script>
 
+  <!-- Facebook auth -->
+  <script>
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
 </head>
 
 <body>
-
-  <!-- Google auth -->
-  <!-- <script src="https://apis.google.com/js/api:client.js"></script> -->
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-  <!-- Facebook auth -->
-  <div id="fb-root"></div>
-  <script>
-    window.initFB = (function ifb(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.10&appId=252336858606968";
-      fjs.parentNode.insertBefore(js, fjs);
-    }).bind(null, document, 'script', 'facebook-jssdk');
-  </script>
-
   <cf-app></cf-app>
 </body>
 
