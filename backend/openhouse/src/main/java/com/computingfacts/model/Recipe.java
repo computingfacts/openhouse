@@ -1,8 +1,8 @@
-
 package com.computingfacts.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,12 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.data.annotation.CreatedDate;
 
 /**
  *
@@ -32,6 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Recipe.findByRecipePrepTime", query = "SELECT r FROM Recipe r WHERE r.recipePrepTime = :recipePrepTime"),
     @NamedQuery(name = "Recipe.findByRecipeCookTime", query = "SELECT r FROM Recipe r WHERE r.recipeCookTime = :recipeCookTime")})
 public class Recipe implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,9 +52,17 @@ public class Recipe implements Serializable {
     private LocalDateTime recipePrepTime;
     @Column(name = "recipe_cook_time")
     private LocalDateTime recipeCookTime;
+    @Column(name = "creationDate")
+    @CreatedDate
+    private LocalDateTime creationDate;
+    @Column(name = "modificationDate")
+    @CreatedDate
+    private LocalDateTime modificationDate;
     @JoinColumn(name = "recipe_author", referencedColumnName = "iduserProfile")
     @ManyToOne(optional = false)
     private UserProfile recipeAuthor;
+    @ManyToMany(mappedBy = "recipes")
+    private Set<Ingredient> ingredients;
 
     public Recipe() {
     }
@@ -116,7 +128,6 @@ public class Recipe implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Recipe)) {
             return false;
         }
@@ -124,6 +135,29 @@ public class Recipe implements Serializable {
         return !((this.idrecipe == null && other.idrecipe != null) || (this.idrecipe != null && !this.idrecipe.equals(other.idrecipe)));
     }
 
+    @XmlTransient
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
 
-    
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public LocalDateTime getModificationDate() {
+        return modificationDate;
+    }
+
+    public void setModificationDate(LocalDateTime modificationDate) {
+        this.modificationDate = modificationDate;
+    }
+
 }

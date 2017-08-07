@@ -112,4 +112,4 @@ public class UserRole implements Serializable {
         return Objects.equals(this.iduserRole, other.iduserRole);
     }
 
-}
+    }

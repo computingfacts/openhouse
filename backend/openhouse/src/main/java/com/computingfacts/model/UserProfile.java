@@ -121,11 +121,9 @@ public class UserProfile implements UserDetails, Serializable {
 
     private LocalDateTime lastLoginTime;
     @Column(name = "creationDate")
-
     @CreatedDate
     private LocalDateTime creationDate;
     @Column(name = "modificationDate")
-
     @CreatedDate
     private LocalDateTime modificationDate;
     @Size(max = 255)
@@ -419,4 +417,4 @@ public class UserProfile implements UserDetails, Serializable {
         this.recipes = recipes;
     }
 
-}
+    }
