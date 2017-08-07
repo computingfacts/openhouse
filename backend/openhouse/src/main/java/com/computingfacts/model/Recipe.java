@@ -58,6 +58,9 @@ public class Recipe implements Serializable {
     @Column(name = "modificationDate")
     @CreatedDate
     private LocalDateTime modificationDate;
+    @Size(max = 45)
+    @Column(name = "recipe_yield")
+    private String recipeYield;
     @JoinColumn(name = "recipe_author", referencedColumnName = "iduserProfile")
     @ManyToOne(optional = false)
     private UserProfile recipeAuthor;
@@ -158,6 +161,14 @@ public class Recipe implements Serializable {
 
     public void setModificationDate(LocalDateTime modificationDate) {
         this.modificationDate = modificationDate;
+    }
+
+    public String getRecipeYield() {
+        return recipeYield;
+    }
+
+    public void setRecipeYield(String recipeYield) {
+        this.recipeYield = recipeYield;
     }
 
 }
