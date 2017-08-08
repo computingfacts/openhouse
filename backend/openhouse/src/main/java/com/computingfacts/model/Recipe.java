@@ -4,16 +4,17 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -64,8 +65,8 @@ public class Recipe implements Serializable {
     @JoinColumn(name = "recipe_author", referencedColumnName = "iduserProfile")
     @ManyToOne(optional = false)
     private UserProfile recipeAuthor;
-    @ManyToMany(mappedBy = "recipes")
-    private Set<Ingredient> ingredients;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idrecipe")
+    private Set<RecipeIngredient> recipeIngredients;
 
     public Recipe() {
     }
@@ -138,13 +139,12 @@ public class Recipe implements Serializable {
         return !((this.idrecipe == null && other.idrecipe != null) || (this.idrecipe != null && !this.idrecipe.equals(other.idrecipe)));
     }
 
-    @XmlTransient
-    public Set<Ingredient> getIngredients() {
-        return ingredients;
+    public String getRecipeYield() {
+        return recipeYield;
     }
 
-    public void setIngredients(Set<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setRecipeYield(String recipeYield) {
+        this.recipeYield = recipeYield;
     }
 
     public LocalDateTime getCreationDate() {
@@ -163,12 +163,13 @@ public class Recipe implements Serializable {
         this.modificationDate = modificationDate;
     }
 
-    public String getRecipeYield() {
-        return recipeYield;
+    @XmlTransient
+    public Set<RecipeIngredient> getRecipeIngredients() {
+        return recipeIngredients;
     }
 
-    public void setRecipeYield(String recipeYield) {
-        this.recipeYield = recipeYield;
+    public void setRecipeIngredients(Set<RecipeIngredient> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 
 }

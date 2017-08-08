@@ -1,28 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.computingfacts.model;
 
 import java.io.Serializable;
-import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,6 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ingredient.findByIngredientImageUrl", query = "SELECT i FROM Ingredient i WHERE i.ingredientImageUrl = :ingredientImageUrl"),
     @NamedQuery(name = "Ingredient.findByIngredientInfo", query = "SELECT i FROM Ingredient i WHERE i.ingredientInfo = :ingredientInfo")})
 public class Ingredient implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,11 +48,8 @@ public class Ingredient implements Serializable {
     @Size(max = 255)
     @Column(name = "ingredient_info")
     private String ingredientInfo;
-    @JoinTable(name = "recipe_ingredient", joinColumns = {
-        @JoinColumn(name = "idingredient", referencedColumnName = "idingredient")}, inverseJoinColumns = {
-        @JoinColumn(name = "idrecipe", referencedColumnName = "idrecipe")})
-    @ManyToMany
-    private Set<Recipe> recipes;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "ingredient")
+    private RecipeIngredient recipeIngredient;
 
     public Ingredient() {
     }
@@ -105,15 +95,6 @@ public class Ingredient implements Serializable {
         this.ingredientInfo = ingredientInfo;
     }
 
-    @XmlTransient
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -135,5 +116,13 @@ public class Ingredient implements Serializable {
     public String toString() {
         return "com.computingfacts.model.Ingredient[ idingredient=" + idingredient + " ]";
     }
-    
+
+    public RecipeIngredient getRecipeIngredient() {
+        return recipeIngredient;
+    }
+
+    public void setRecipeIngredient(RecipeIngredient recipeIngredient) {
+        this.recipeIngredient = recipeIngredient;
+    }
+
 }
