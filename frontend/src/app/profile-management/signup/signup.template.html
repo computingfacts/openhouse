@@ -1,0 +1,49 @@
+
+<ng-container *ngIf="pendingApproval; then confirmAccount; else signupForm">
+</ng-container>
+
+<ng-template #confirmAccount>
+    <div class="user-not-active">
+        <h3>You account is ready!</h3>
+        <h4>Please check your emails to confirm your account.</h4>
+        <span>No luck? <a>Re-send the email?</a></span>
+        <cf-or-break></cf-or-break>
+        <span><a>Create a new accout</a></span>
+    </div>
+</ng-template>
+
+<ng-template #signupForm>
+    <form class="signup-form" [formGroup]="signupFormGroup" novalidate>
+
+        <!-- Username -->
+        <div class="form-group">
+            <input class="form-control" formControlName="email" placeholder="Email address">
+        </div>
+
+        <!-- First name -->
+        <div class="form-group">
+            <input class="form-control" formControlName="firstName" placeholder="First name">
+        </div>
+
+        <!-- Last name -->
+        <div class="form-group">
+            <input class="form-control" formControlName="lastName" placeholder="Last name">
+        </div>
+
+        <!-- Password -->
+        <div class="form-group" *ngIf="showPassword">
+            <input class="form-control" type="password" formControlName="password" placeholder="Password">
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary" (click)="signup()" [disabled]="signingUp || signupFormGroup.invalid">
+                <span *ngIf="!signingUp">Sign up</span>
+                <cf-spinner *ngIf="signingUp"></cf-spinner>
+            </button>
+        </div>
+
+        <cf-or-break></cf-or-break>
+
+        <cf-social-auth></cf-social-auth>
+    </form>
+</ng-template>

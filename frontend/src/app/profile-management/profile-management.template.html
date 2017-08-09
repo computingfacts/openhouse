@@ -1,0 +1,53 @@
+<ng-template *ngIf="viewTemplate; then templateView; else menu"></ng-template>
+
+<ng-template #menu>
+    <ng-container *ngIf="userAuthenticated(); then userMenu; else anonymousMenu"></ng-container>
+</ng-template>
+
+<!-- Menu shown when a user is not logged in -->
+<ng-template #anonymousMenu>
+
+    <!-- Login -->
+    <div class="menu-item" (click)="setTemplate(login)">
+        <span class="icon fa fa-user"></span>
+        <span class="label">Login</span>
+    </div>
+
+    <!-- Signup -->
+    <div class="menu-item" (click)="setTemplate(signup)">
+        <span class="icon fa fa-user-plus"></span>
+        <span class="label">Sign up</span>
+    </div>
+
+</ng-template>
+
+<!-- Menu show when the user is logged in -->
+<ng-template #userMenu></ng-template>
+
+<!-- The containter menu teplates are placed into -->
+<ng-template #templateView>
+    <div class="back-to-menu" (click)="cleanTemplate()">
+        <i class="icon fa fa-arrow-left"></i>
+        <span>Back</span>
+    </div>
+
+    <ng-container *ngIf="viewTemplate; then viewTemplate"></ng-container>
+</ng-template>
+
+<!-- ====== The templates placed in the container ====== -->
+
+<ng-template #login>
+    <cf-login></cf-login>
+    <div class="toggle-auth">
+        <span class="label">Don't have an account?</span>
+        <a class="link" (click)="setTemplate(signup)">Sign up</a>
+    </div>
+</ng-template>
+
+<ng-template #signup>
+    <cf-signup></cf-signup>
+    <div class="toggle-auth">
+        <span class="label">Already have an account?</span>
+        <a class="link" (click)="setTemplate(login)">Login</a>
+    </div>
+</ng-template>

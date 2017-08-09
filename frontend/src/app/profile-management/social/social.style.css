@@ -1,0 +1,31 @@
+.social-auth {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.btn.btn-primary {
+    border-radius: 0;
+    float: right;
+    cursor: pointer;
+    flex: 1
+}
+
+.icon {
+    margin: 0 0.2rem;
+}
+
+.twitter {
+    background-color: #55ACEE;
+    border-color: #55ACEE;
+}
+
+.facebook {
+    background-color: #3B5998;
+    border-color: #3B5998;
+}
+
+.google {
+    background-color: #3F729B;
+    border-color: #3F729B;
+}

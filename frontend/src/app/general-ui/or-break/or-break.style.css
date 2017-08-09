@@ -1,0 +1,25 @@
+:host {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.break {
+    border-top: solid 2px #AAA;
+    flex: 0 0 90%
+}
+
+.or {
+    border-radius: 100px;
+    position: absolute;
+    margin: auto;
+    background-color: #FFF;
+    color: #555;
+    border: 2px solid #AAA;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    margin-top: -1rem;
+    font-size: 15px;
+    line-height: 25px;
+}
