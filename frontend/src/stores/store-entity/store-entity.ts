@@ -32,4 +32,8 @@ export class StoreEntity<TValue> implements IStoreEntity<TValue> {
         return this.changeEmitter.subscribe(next, error, complete);
     }
 
+    public unsubscribe(): void {
+        this.changeEmitter.unsubscribe
+    }
+
 }

@@ -1,0 +1,40 @@
+.drill-down-menu-item {
+    padding: .5rem 3rem;
+    cursor: pointer;
+}
+
+.drill-down-menu-item:hover {
+    border-left: solid thick #167DFF;
+    background-color: #BBB;
+}
+
+.drill-down-menu-item > .icon, 
+.back-to-menu > .icon {
+    width: 1.5rem;
+    text-align: left;
+}
+
+.back-to-menu {
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+}
+
+.back-to-menu:hover {
+    background-color: #BBB;
+}
+
+.toggle-auth {
+    display: flex;
+    padding: 0.5rem 2rem;
+    justify-content: center;
+}
+
+.toggle-auth > .link {
+    color: #167DFF;
+    cursor: pointer;
+    margin-left: 1rem
+}
+
+.toggle-auth > .link:hover {
+    color: blue;
+}

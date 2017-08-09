@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 import { UserStoreService } from "../../../stores/user-store/user-store.service";
 import { SocialUserStoreService, IBaseSocialUser } from "../social/social-user-store/social-user-store.service";
-import { IUser } from "../../../stores/user-store/user";
+import { IUser } from "../../../data-access/user/i-user";
 
 export interface ISignupFormGroup {
     email: string;

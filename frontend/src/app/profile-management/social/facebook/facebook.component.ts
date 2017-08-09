@@ -23,12 +23,12 @@ export class FacebookAuthComponent extends ABaseSocialComponentController {
             return;
         }
 
-        FB.init({
-            appId: FacebookAuthComponent.appId,
-            cookie: true,
-            xfbml: true,
-            version: FacebookAuthComponent.version
-        });
+        // FB.init({
+        //     appId: FacebookAuthComponent.appId,
+        //     cookie: true,
+        //     xfbml: true,
+        //     version: FacebookAuthComponent.version
+        // });
 
         FacebookAuthComponent.hasInit = true;
     }

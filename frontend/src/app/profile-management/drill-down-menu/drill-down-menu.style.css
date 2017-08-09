@@ -1,0 +1,8 @@
+.drop-down-menu {
+    display: flex;
+}
+
+.drop-down-menu .title {
+    display: flex;
+    background: rgba(0, 0, 0, 0.2);
+}

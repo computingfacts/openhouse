@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-import { IUser } from "./user";
+import { IUser } from "../../data-access/user/i-user";
 import { StoreEntity } from "../store-entity/store-entity";
 import { LocalStorageService, ELocalStorageKeys } from "../../local-storage/local-storage.service";
 import { AuthenticationApiService } from "../../api/authentication/authentication.service";

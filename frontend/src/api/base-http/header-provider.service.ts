@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Headers } from "@angular/http";
 import { LocalStorageService, ELocalStorageKeys } from "../../local-storage/local-storage.service";
-import { IUser } from "../../stores/user-store/user";
+import { IUser } from "../../data-access/user/i-user";
 
 export type THeaderKeyValues = { [name: string]: string };
 
