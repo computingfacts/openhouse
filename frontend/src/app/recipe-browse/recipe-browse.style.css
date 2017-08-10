@@ -12,6 +12,6 @@
 .recipe-pane {
     display: flex;
     flex-direction: row; 
-    width: 80%;
+    width: 90%;
     margin: auto;
 }

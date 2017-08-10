@@ -1,0 +1,28 @@
+<div class="thumbnail card">
+    <div class="card-header thumbnail-header">
+        <h4 class="card-title thumbnail-title">{{ thumbnailDetails.title }}</h4>
+    </div>
+    <img [src]="thumbnailDetails.coverImageUrl" *ngIf="thumbnailDetails.coverImageUrl" class="thumbnail-image img-fluid">
+    <div class="card-block thumbnail-infomation">
+        <p class="card-text thumbnail-description-text">{{ thumbnailDetails.description }}</p>
+        <footer>
+            <small class="text-muted thumbnail-author">
+                {{ thumbnailDetails.authorName }}
+            </small>
+        </footer>
+    </div>
+    <div class="thumbnail-icons" *ngIf="thumbnailDetails.infoIcons">
+        <div *ngFor="let icon of thumbnailDetails.infoIcons" [title]="icon.tooltip" class="thumbnail-icon">
+            <span class="icon" [ngClass]="icon.iconClass"></span>
+            <span *ngIf="icon.value">{{ icon.value }}</span>
+        </div>
+    </div>
+    <div class="thumbnail-action">
+        <span class="thumbnail-favourite fa" [ngClass]="{ 'fa-heart-o': !thumbnailDetails.isFavourite, 'fa-heart favourite': thumbnailDetails.isFavourite }">
+        </span>
+        <span class="thumbnail-rating">
+            <ngb-rating [rate]="thumbnailDetails.rating" (rate)="setRating($event)" [max]="maxRating"></ngb-rating>
+        </span>
+        <div class="thumbnail-details btn btn-secondary" (click)="showDetails()" i18n="@@details">Details</div>
+    </div>
+</div>

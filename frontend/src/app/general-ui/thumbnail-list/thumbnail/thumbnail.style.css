@@ -1,0 +1,110 @@
+.thumbnail {
+    margin: .5rem;
+    border-radius: 0;
+    border: none;
+}
+
+.thumbnail-header {
+    position: absolute;
+    margin: auto;
+    margin-top: 1rem;
+    padding: .25rem .5rem;
+    border-radius: 0px;
+    max-width: 95%;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 2px 2px 2px #555;
+}
+
+.thumbnail-header .thumbnail-title {
+    margin: 0;
+}
+
+.thumbnail-image {
+    height: 15rem;
+    max-width: 20rem;
+    width: 100%;
+}
+
+.thumbnail-description {
+    padding: .25rem 1.25rem;
+}
+
+.thumbnail-description-text {
+    max-width: 17rem;
+    font-size: 10pt;
+    height: 4em; 
+    text-align: justify;
+}
+
+.thumbnail-action {
+    display: flex;
+    height: 3rem;
+}
+
+.thumbnail-favourite,
+.thumbnail-rating,
+.thumbnail-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.thumbnail-favourite {
+    height: 3rem;
+    width: 3rem;
+    flex: 0 0 auto;
+}
+
+.thumbnail-favourite.favourite {
+    color: #E3000A;
+}
+
+.thumbnail-rating {
+    cursor: default;
+    flex: 1;
+}
+
+.thumbnail-details {
+    border: none;
+    background: transparent;
+    width: 7rem;
+    border-radius: 0;
+}
+
+.thumbnail-details:hover {
+    background-color: #167DFF;
+    color: white;
+}
+
+.thumbnail-rating:hover {
+    color: #167DFF;
+}
+
+.thumbnail-favourite:hover {
+    background-color: #ccc;
+    color: #167DFF;
+}
+
+.thumbnail-icons {
+    display: flex;
+    font-size: 10pt;
+    color: #555;
+    justify-content: space-around;
+    background-color: #EEE;
+    padding: .25rem;
+}
+
+.thumbnail-icon {
+    cursor: pointer;
+    display: flex;
+}
+
+.thumbnail-icon > span.icon {
+    padding: .25rem;
+}
+
+.thumbnail-icon:hover {
+    color: #167DFF;
+}
+
